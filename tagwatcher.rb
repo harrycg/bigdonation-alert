@@ -5,10 +5,9 @@ require 'json'
 require 'nationbuilder'
 require 'slack-notifier'
 
-require 'slack-notifier'
 
 notifier = Slack::Notifier.new "WEBHOOK_URL"
-notifier.ping "Hello World"
+notifier.ping "Hello World", channel: "techteam"
 
 =begin
 def get_old_tags(file)

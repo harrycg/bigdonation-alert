@@ -11,13 +11,17 @@ two_days_ago = Date.today - 2
   puts "Loading donations..."
 response = client.call(:donations, :index, limit: 100)
 page = NationBuilder::Paginator.new(client, response)
-donations = page.body['results']
-while page.prev?
-  donations += page.body['results']
-  break unless Date.parse(donations.last['created_at']) >= two_days_ago
+
+donations = []
+donations += page.body['results']
+while page.next?
   page = page.next
+  break unless Date.parse(donations.last['created_at']) >= two_days_ago
+  donations += page.body['results']
 end
   
+
+
 donations.each do |d|
 if d['amount_in_cents'] > 20000
   
@@ -26,10 +30,13 @@ if d['amount_in_cents'] > 20000
  last_name = d['donor']['last_name']
   amount = d['amount']
   person_id = d['donor']['id']
-  
-    puts "#{email} donated #{amount}"
-   notifier = Slack::Notifier.new ENV['SLACK']
+  date = d['created_at']
+
+    puts "#{email} donated #{amount} on #{date}"
+=begin
+  notifier = Slack::Notifier.new ENV['SLACK']
 notifier.ping "#{email} donated #{amount}"
+=end
 else
   email = d['donor']['email']
   first_name = d['donor']['first_name']

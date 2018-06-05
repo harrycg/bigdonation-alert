@@ -5,6 +5,7 @@ require 'json'
 require 'nationbuilder'
 require 'slack-notifier'
 
+=begin
 def get_old_tags(file)
   Dir.mkdir('cache') unless File.exists?('cache')
   Dir.mkdir('cache/email') unless File.exists?('cache/email')
@@ -192,3 +193,4 @@ if __FILE__ == $0
   end
 
 end 
+=end

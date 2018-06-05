@@ -7,8 +7,7 @@ require 'slack-notifier'
 
 
 notifier = Slack::Notifier.new "ENV["WEBHOOK_URL"]"
-notifier.ping "Hello World", channel: "#news"
-
+notifier.ping "Hello World"
 =begin
 def get_old_tags(file)
   Dir.mkdir('cache') unless File.exists?('cache')

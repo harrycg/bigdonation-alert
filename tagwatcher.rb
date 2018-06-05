@@ -12,7 +12,7 @@ two_days_ago = Date.today - 2
 response = client.call(:donations, :index, limit: 100)
 page = NationBuilder::Paginator.new(client, response)
 donations = page.body['results']
-while page.next?
+while page.prev?
   donations += page.body['results']
   break unless Date.parse(donations.last['created_at']) >= two_days_ago
   page = page.next

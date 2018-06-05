@@ -6,9 +6,8 @@ require 'nationbuilder'
 require 'slack-notifier'
 
 
-puts ENV['SLACK']
-
-
+notifier = Slack::Notifier.new ENV['SLACK']
+notifier.ping "Hello World"
 
    
 

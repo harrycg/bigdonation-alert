@@ -6,9 +6,9 @@ require 'nationbuilder'
 require 'slack-notifier'
 
 
-WEBHOOK_URL = ENV["WEBHOOK_URL"]
+KEY = ENV["WEBHOOK_URL"]
 
-notifier = Slack::Notifier.new "WEBHOOK_URL"
+notifier = Slack::Notifier.new "KEY"
 notifier.ping "Hello World"
 
    

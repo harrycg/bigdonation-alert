@@ -5,9 +5,42 @@ require 'json'
 require 'nationbuilder'
 require 'slack-notifier'
 
+client = NationBuilder::Client.new('harrycossar', ENV['NATIONBUILDER_APIKEY'], retries: 8)
 
-notifier = Slack::Notifier.new ENV['SLACK']
-notifier.ping "Hello World"
+two_days_ago = Date.today - 2
+  puts "Loading donations..."
+response = client.call(:donations, :index, limit: 100)
+page = NationBuilder::Paginator.new(client, response)
+donations = page.body['results']
+while page.next?
+  donations += page.body['results']
+  break unless Date.parse(donations.last['created_at']) >= two_days_ago
+  page = page.next
+end
+  
+donations.each do |d|
+if d['amount_in_cents'] > 20000
+  
+    email = d['donor']['email']
+  first_name = d['donor']['first_name']
+ last_name = d['donor']['last_name']
+  amount = d['amount']
+  person_id = d['donor']['id']
+  
+    puts "#{email} donated #{amount}"
+   notifier = Slack::Notifier.new ENV['SLACK']
+notifier.ping "#{email} donated #{amount}"
+else
+  email = d['donor']['email']
+  first_name = d['donor']['first_name']
+ last_name = d['donor']['last_name']
+  amount = d['amount']
+  person_id = d['donor']['id']
+  puts "#{email} LESS THAN 20. the donated #{amount}"
+end
+end
+
+
 
    
 

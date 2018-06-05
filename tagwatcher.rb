@@ -5,12 +5,12 @@ require 'json'
 require 'nationbuilder'
 require 'slack-notifier'
 
-url="ENV['SLACK']"
 
-puts "ENV['SLACK']"
-
+puts ENV['SLACK']
 
 
+
+   
 
 =begin
 def get_old_tags(file)

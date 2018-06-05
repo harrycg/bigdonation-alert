@@ -6,24 +6,13 @@ require 'nationbuilder'
 require 'slack-notifier'
 
 
-def send_tag_alert(webhook_url)
-  notifier = Slack::Notifier.new webhook_url do
-notifier.ping "Hello World"
-
-  end
-  
 WEBHOOK_URL = ENV["WEBHOOK_URL"]
 
-    if WEBHOOK_URL.nil? 
-      p "Invalid Slack configuration. "
-      exit 1
-    end
-
+notifier = Slack::Notifier.new "WEBHOOK_URL"
+notifier.ping "Hello World"
 
    
 
-
-      send_tag_alert(WEBHOOK_URL)
 
 =begin
 def get_old_tags(file)

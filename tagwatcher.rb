@@ -7,7 +7,7 @@ require 'slack-notifier'
 
 client = NationBuilder::Client.new('harrycossar', ENV['NATIONBUILDER_APIKEY'], retries: 8)
 
-two_days_ago = Date.today - 2
+two_days_ago = Date.today - 1
   puts "Loading donations..."
 response = client.call(:donations, :index, limit: 100)
 page = NationBuilder::Paginator.new(client, response)

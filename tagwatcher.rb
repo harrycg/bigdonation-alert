@@ -5,11 +5,11 @@ require 'json'
 require 'nationbuilder'
 require 'slack-notifier'
 
+url="ENV['SLACK']"
 
-notifier = Slack::Notifier.new "ENV['SLACK']"
-notifier.ping "Hello World"
+puts "ENV['SLACK']"
 
-   
+
 
 
 =begin

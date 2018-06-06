@@ -34,7 +34,7 @@ if d['amount_in_cents'] > 20000
   person_id = d['donor']['id']
   date = d['created_at']
 
-    puts "#{email} donated #{amount} on #{date}"
+    puts "BIG #{email} donated #{amount} on #{date}"
 
   notifier = Slack::Notifier.new ENV['SLACK'] 
 notifier.ping "#{first_name} #{last_name} #{email} donated #{amount} on #{date}"
@@ -45,7 +45,7 @@ else
   amount = d['amount']
   person_id = d['donor']['id']
   date = d['created_at']
-      puts "#{email} donated #{amount} on #{date}"
+      puts "LITTLE #{email} donated #{amount} on #{date}"
 
 end
 end

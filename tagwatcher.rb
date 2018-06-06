@@ -14,10 +14,8 @@ page = NationBuilder::Paginator.new(client, response)
 
 donations = []
 
-unless Date.parse(donations['created_at']) >= two_days_ago
 donations += page.body['results']
-end
-  
+
 while page.next?
   page = page.next
   break unless Date.parse(donations.last['created_at']) >= two_days_ago
@@ -28,7 +26,8 @@ end
 
 donations.each do |d|
 if d['amount_in_cents'] > 20000
-  
+  if Date.parse(donations.last['created_at']) <= two_days_ago
+ 
     email = d['donor']['email']
   first_name = d['donor']['first_name']
  last_name = d['donor']['last_name']
@@ -41,6 +40,7 @@ if d['amount_in_cents'] > 20000
   notifier = Slack::Notifier.new ENV['SLACK']
 notifier.ping "#{email} donated #{amount}"
 =end
+  end
 else
   email = d['donor']['email']
   first_name = d['donor']['first_name']

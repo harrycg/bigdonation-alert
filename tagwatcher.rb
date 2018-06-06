@@ -39,6 +39,14 @@ if d['amount_in_cents'] > 20000
   notifier = Slack::Notifier.new ENV['SLACK'] 
 notifier.ping "#{first_name} #{last_name} #{email} donated #{amount} on #{date}"
 else
+      email = d['donor']['email']
+  first_name = d['donor']['first_name']
+ last_name = d['donor']['last_name']
+  amount = d['amount']
+  person_id = d['donor']['id']
+  date = d['created_at']
+      puts "#{email} donated #{amount} on #{date}"
+
 end
 end
 

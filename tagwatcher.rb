@@ -14,7 +14,7 @@ page = NationBuilder::Paginator.new(client, response)
 
 donations = []
 
-unless Date.parse(donations.last['created_at']) >= two_days_ago
+unless Date.parse(donations['created_at']) >= two_days_ago
 donations += page.body['results']
 end
   

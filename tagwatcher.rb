@@ -26,7 +26,7 @@ end
 
 donations.each do |d|
 if d['amount_in_cents'] > 20000
-  if Date.parse(donations.last['created_at']) <= two_days_ago
+  if Date.parse(d['created_at']) <= two_days_ago
  
     email = d['donor']['email']
   first_name = d['donor']['first_name']
